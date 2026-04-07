@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priyanka Chopra — Social Dashboard</title>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@700;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Stylesheets (order matters) -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       SIDEBAR
+  ════════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">✦</div>
+      <div class="logo-text">PC<span>Studio</span></div>
+    </div>
+
+    <div class="nav-label">Analytics</div>
+    <a class="nav-item active" onclick="switchPage('overview', this)">
+      <span class="nav-icon">⬡</span>Overview
+    </a>
+    <a class="nav-item" onclick="switchPage('charts', this)">
+      <span class="nav-icon">◈</span>Charts
+    </a>
+    <a class="nav-item" onclick="switchPage('posts', this)">
+      <span class="nav-icon">⊡</span>Top Posts
+    </a>
+
+    <div class="nav-label">Content</div>
+    <a class="nav-item" onclick="switchPage('schedule', this)">
+      <span class="nav-icon">◷</span>Scheduled
+    </a>
+    <a class="nav-item" onclick="switchPage('audience', this)">
+      <span class="nav-icon">◉</span>Audience
+    </a>
+    <a class="nav-item" onclick="switchPage('feed', this)">
+      <span class="nav-icon">◎</span>Activity
+    </a>
+
+    <div class="sidebar-footer">
+      <div class="profile-mini">
+        <div class="profile-avatar">PC</div>
+        <div class="profile-info">
+          <div class="profile-name">Priyanka Chopra</div>
+          <div class="profile-handle">@priyankachopra</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile overlay -->
+  <div class="overlay" id="overlay" onclick="closeMobile()"></div>
+
+  <!-- ════════════════════════════════════════
+       TOPBAR
+  ════════════════════════════════════════ -->
+  <header class="topbar" id="topbar">
+    <button class="menu-btn" onclick="toggleSidebar()" title="Toggle sidebar">☰</button>
+    <div class="topbar-title">Social Dashboard</div>
+
+    <div class="search-bar">
+      🔍
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search..."
+        onkeyup="searchFunction(event)"
+      />
+    </div>
+
+    <div class="topbar-actions">
+      <!-- Notifications -->
+      <div class="icon-btn tooltip" onclick="toggleNotifications()" id="notifBtn">
+        🔔
+        <div class="notif-dot" id="notifDot"></div>
+        <span class="tooltip-text">Notifications</span>
+      </div>
+      <div id="notifPanel" class="notif-panel">
+        <div class="notif-item">🔥 New follower</div>
+        <div class="notif-item">💬 New comment</div>
+        <div class="notif-item">📈 Engagement increased</div>
+      </div>
+
+      <!-- Export -->
+      <div class="icon-btn tooltip">
+        📊<span class="tooltip-text">Export report</span>
+      </div>
+
+      <!-- Theme -->
+      <div class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+        <div class="toggle-knob" id="themeKnob">🌙</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════════════════════════════════════
+       MAIN CONTENT
+  ════════════════════════════════════════ -->
+  <main class="main" id="main">
+
+    <!-- ── OVERVIEW ── -->
+    <div class="page active" id="page-overview">
+
+      <!-- Hero header -->
+      <div class="hero-header">
+        <div class="hero-avatar">PC</div>
+        <div class="hero-info">
+          <h1>Priyanka Chopra Jonas</h1>
+          <div class="hero-meta">
+            <span class="verified">✦ Verified Global Celeb</span>
+            <span>🌏 Bollywood · Hollywood · UNICEF</span>
+            <span>📅 Since 2000</span>
+          </div>
+        </div>
+        <div class="hero-badges">
+          <div class="badge badge-global">🌐 #77 Global</div>
+          <div class="badge badge-live">
+            <span class="live-dot"></span>Live
+          </div>
+        </div>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="grid grid-4 mb-20">
+        <div class="stat-card insta">
+          <div class="stat-glow"></div>
+          <div class="stat-platform"><span class="stat-platform-icon">📸</span>Instagram</div>
+          <div class="stat-number" id="cnt-insta">0</div>
+          <div class="stat-label">Total Followers</div>
+          <div class="stat-change up">▲ +184,696 this month (0.20%)</div>
+        </div>
+        <div class="stat-card twitter">
+          <div class="stat-glow"></div>
+          <div class="stat-platform"><span class="stat-platform-icon">𝕏</span>Twitter / X</div>
+          <div class="stat-number" id="cnt-twitter">0</div>
+          <div class="stat-label">Total Followers</div>
+          <div class="stat-change up">▲ Top 10 in India</div>
+        </div>
+        <div class="stat-card reach">
+          <div class="stat-glow"></div>
+          <div class="stat-platform"><span class="stat-platform-icon">📣</span>Combined Reach</div>
+          <div class="stat-number" id="cnt-reach">0</div>
+          <div class="stat-label">All Platforms (FB+IG+X)</div>
+          <div class="stat-change up">▲ #1 Indian Actress</div>
+        </div>
+        <div class="stat-card growth">
+          <div class="stat-glow"></div>
+          <div class="stat-platform"><span class="stat-platform-icon">💰</span>Est. Earn / Post</div>
+          <div class="stat-number" id="cnt-earn">$0</div>
+          <div class="stat-label">Sponsored IG Post</div>
+          <div class="stat-change up">▲ $216K–297K / month</div>
+        </div>
+      </div>
+
+      <!-- Mini stats -->
+      <div class="grid grid-4 mb-20">
+        <div class="card glass-card">
+          <div class="card-header">
+            <span class="card-title">Engagement Rate</span>
+            <span class="card-badge badge-up">High</span>
+          </div>
+          <div style="font-size:28px;font-weight:700;font-family:'Playfair Display',serif">3.89%</div>
+          <div class="text-muted">vs avg 1.2% for similar</div>
+        </div>
+        <div class="card glass-card">
+          <div class="card-header">
+            <span class="card-title">Avg Likes / Post</span>
+            <span class="card-badge badge-up">+12%</span>
+          </div>
+          <div style="font-size:28px;font-weight:700;font-family:'Playfair Display',serif">381K</div>
+          <div class="text-muted">0.40% likes/follower ratio</div>
+        </div>
+        <div class="card glass-card">
+          <div class="card-header">
+            <span class="card-title">Avg Comments</span>
+            <span class="card-badge badge-up">Good</span>
+          </div>
+          <div style="font-size:28px;font-weight:700;font-family:'Playfair Display',serif">2,157</div>
+          <div class="text-muted">188.61 likes:comment ratio</div>
+        </div>
+        <div class="card glass-card">
+          <div class="card-header"><span class="card-title">Total IG Posts</span></div>
+          <div style="font-size:28px;font-weight:700;font-family:'Playfair Display',serif">4,012</div>
+          <div class="text-muted">+10 posts this month</div>
+        </div>
+      </div>
+
+      <!-- Charts preview -->
+      <div class="grid grid-2 mb-20">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📈 Follower Growth Trend</span>
+            <div class="tab-group">
+              <div class="tab-btn active" onclick="switchTab(this,'growth','6m')">6M</div>
+              <div class="tab-btn"        onclick="switchTab(this,'growth','1y')">1Y</div>
+            </div>
+          </div>
+          <div class="chart-container" style="height:200px">
+            <canvas id="growthChart"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📊 Engagement by Platform</span>
+          </div>
+          <div class="chart-container" style="height:200px">
+            <canvas id="engagementChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engagement breakdown -->
+      <div class="card mb-20">
+        <div class="card-header">
+          <span class="card-title">🎯 Engagement Breakdown</span>
+          <span class="card-badge badge-up">Instagram</span>
+        </div>
+        <div class="eng-row">
+          <span class="eng-label">Likes</span>
+          <div class="eng-bar"><div class="eng-fill" style="width:0%;background:var(--grad2)" data-w="82"></div></div>
+          <span class="eng-val" style="color:var(--accent3)">381K</span>
+        </div>
+        <div class="eng-row">
+          <span class="eng-label">Comments</span>
+          <div class="eng-bar"><div class="eng-fill" style="width:0%;background:var(--grad3)" data-w="15"></div></div>
+          <span class="eng-val" style="color:var(--accent2)">2.1K</span>
+        </div>
+        <div class="eng-row">
+          <span class="eng-label">Shares</span>
+          <div class="eng-bar"><div class="eng-fill" style="width:0%;background:var(--grad1)" data-w="58"></div></div>
+          <span class="eng-val" style="color:var(--accent)">~14K</span>
+        </div>
+        <div class="eng-row">
+          <span class="eng-label">Saves</span>
+          <div class="eng-bar"><div class="eng-fill" style="width:0%;background:linear-gradient(90deg,var(--gold),var(--accent3))" data-w="35"></div></div>
+          <span class="eng-val" style="color:var(--gold)">~8.4K</span>
+        </div>
+      </div>
+
+    </div><!-- /page-overview -->
+
+    <!-- ── CHARTS ── -->
+    <div class="page" id="page-charts">
+      <div class="section-title"><span class="section-icon">◈</span>Charts &amp; Analytics</div>
+      <div class="grid grid-2 mb-20">
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📈 Monthly Follower Growth (IG)</span>
+          </div>
+          <div class="chart-container" style="height:260px">
+            <canvas id="lineChartFull"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <span class="card-title">📊 Platform Comparison</span>
+          </div>
+          <div class="chart-container" style="height:260px">
+            <canvas id="barChartFull"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-header"><span class="card-title">🥧 Engagement Split</span></div>
+          <div style="max-width:280px;margin:0 auto">
+            <canvas id="doughnutChart" height="220"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">💰 Earnings Trend (USD)</span></div>
+          <div class="chart-container" style="height:260px">
+            <canvas id="earningsChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div><!-- /page-charts -->
+
+    <!-- ── TOP POSTS ── -->
+    <div class="page" id="page-posts">
+      <div class="section-title"><span class="section-icon">⊡</span>Top Posts</div>
+      <div class="post-grid" id="postGrid"></div>
+    </div>
+
+    <!-- ── SCHEDULE ── -->
+    <div class="page" id="page-schedule">
+      <div class="section-title"><span class="section-icon">◷</span>Scheduled Posts</div>
+      <div class="grid grid-2-1">
+        <div>
+          <div class="timeline" id="timeline"></div>
+        </div>
+        <div class="card glass-card" style="height:fit-content">
+          <div class="card-title mb-12">📅 Post Calendar</div>
+          <div id="miniCal" style="font-size:13px;line-height:2"></div>
+          <div class="divider"></div>
+          <div style="font-size:12px;color:var(--muted)">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">
+              <span style="color:var(--accent2)">●</span>3 posts scheduled this week
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">
+              <span style="color:var(--green)">●</span>12 posts published this month
+            </div>
+            <div style="display:flex;gap:8px;align-items:center">
+              <span style="color:var(--muted)">●</span>2 drafts pending review
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /page-schedule -->
+
+    <!-- ── AUDIENCE ── -->
+    <div class="page" id="page-audience">
+      <div class="section-title"><span class="section-icon">◉</span>Audience Insights</div>
+      <div class="grid grid-3 mb-20">
+        <div class="card">
+          <div class="card-title mb-12">👥 Gender Split</div>
+          <canvas id="genderChart" height="180"></canvas>
+          <div class="legend">
+            <div class="legend-item">
+              <span class="legend-label"><span class="legend-dot" style="background:#c97fff"></span>Female</span>
+              <span class="legend-val">58%</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-label"><span class="legend-dot" style="background:#7fb3ff"></span>Male</span>
+              <span class="legend-val">38%</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-label"><span class="legend-dot" style="background:#72efad"></span>Other</span>
+              <span class="legend-val">4%</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title mb-12">🎂 Age Groups</div>
+          <canvas id="ageChart" height="180"></canvas>
+          <div class="legend">
+            <div class="legend-item">
+              <span class="legend-label"><span class="legend-dot" style="background:#ff8fa3"></span>18–24</span>
+              <span class="legend-val">32%</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-label"><span class="legend-dot" style="background:#c97fff"></span>25–34</span>
+              <span class="legend-val">38%</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-label"><span class="legend-dot" style="background:#7fb3ff"></span>35–44</span>
+              <span class="legend-val">18%</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-label"><span class="legend-dot" style="background:#72efad"></span>45+</span>
+              <span class="legend-val">12%</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title mb-12">🌍 Top Locations</div>
+          <div id="locationBars"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title mb-12">🌐 Global Reach Breakdown</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px">
+          <div style="text-align:center;padding:16px;background:var(--surface);border-radius:var(--radius-sm)">
+            <div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif;color:var(--accent)">94M+</div>
+            <div style="font-size:12px;color:var(--muted)">Instagram Followers</div>
+          </div>
+          <div style="text-align:center;padding:16px;background:var(--surface);border-radius:var(--radius-sm)">
+            <div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif;color:var(--accent2)">27.9M</div>
+            <div style="font-size:12px;color:var(--muted)">Twitter / X</div>
+          </div>
+          <div style="text-align:center;padding:16px;background:var(--surface);border-radius:var(--radius-sm)">
+            <div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif;color:var(--accent3)">54M+</div>
+            <div style="font-size:12px;color:var(--muted)">Facebook</div>
+          </div>
+          <div style="text-align:center;padding:16px;background:var(--surface);border-radius:var(--radius-sm)">
+            <div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif;color:var(--gold)">175M+</div>
+            <div style="font-size:12px;color:var(--muted)">Combined Platforms</div>
+          </div>
+          <div style="text-align:center;padding:16px;background:var(--surface);border-radius:var(--radius-sm)">
+            <div style="font-size:24px;font-weight:700;font-family:'Playfair Display',serif;color:var(--green)">$297K</div>
+            <div style="font-size:12px;color:var(--muted)">Max Monthly Earnings</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /page-audience -->
+
+    <!-- ── ACTIVITY FEED ── -->
+    <div class="page" id="page-feed">
+      <div class="section-title"><span class="section-icon">◎</span>Activity Feed</div>
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        <div class="tab-btn active">All</div>
+        <div class="tab-btn">Likes</div>
+        <div class="tab-btn">Comments</div>
+        <div class="tab-btn">Follows</div>
+      </div>
+      <div class="feed" id="activityFeed"></div>
+    </div><!-- /page-feed -->
+
+  </main>
+
+  <!-- ════════════════════════════════════════
+       SCRIPTS (order: deps → data → ui → charts → app)
+  ════════════════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
