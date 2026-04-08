@@ -103,3 +103,5 @@ npm run dev
 - Responsive grid — 4 → 2 → 1 columns
 - Notification panel
 - Search-to-navigate
+
+Deployed link - https://vasudhaagrawal2024-byte.github.io/Pc_Social_Media_Dashboard/
